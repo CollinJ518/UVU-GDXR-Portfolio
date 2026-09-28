@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Simple singleton so other scripts can call GameManager.Instance
         if (Instance == null)
         {
             Instance = this;
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    // Called by PlayerController when the player is hit
     public void PlayerHit()
     {
         if (!gameActive) return;
@@ -60,6 +58,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Heal()
+    {
+        if (!gameActive) return;
+
+        if (currentLives < maxLives)
+        {
+            currentLives++;
+            UpdateUI();
+            Debug.Log("Healed! Lives: " + currentLives);
+        }
+        else
+        {
+            Debug.Log("Already at max lives, heal had no effect.");
+        }
+    }
+
     void EndGame()
     {
         gameActive = false;
@@ -67,8 +81,7 @@ public class GameManager : MonoBehaviour
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
 
-        // Stop the spawner too
-        ObjectSpawner spawner = FindObjectOfType<ObjectSpawner>();
+        ObjectSpawner spawner = FindFirstObjectByType<ObjectSpawner>();
         if (spawner != null) spawner.StopSpawning();
     }
 

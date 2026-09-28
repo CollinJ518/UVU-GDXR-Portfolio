@@ -21,11 +21,17 @@ public class PlayerHeadHitbox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("FallingObject")) return;
         if (playerController == null) return;
-        if (playerController.IsInvincible()) return;
 
-        playerController.TakeHit();
-        Destroy(other.gameObject);
+        if (other.CompareTag("FallingObject") && !playerController.IsInvincible())
+        {
+            playerController.TakeHit();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("HealthObject"))
+        {
+            if (GameManager.Instance != null) GameManager.Instance.Heal();
+            Destroy(other.gameObject);
+        }
     }
 }
