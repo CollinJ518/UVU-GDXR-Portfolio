@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 429580225150922216}
   - component: {fileID: 7511809613110488878}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Arrow
   m_TagString: FallingObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
