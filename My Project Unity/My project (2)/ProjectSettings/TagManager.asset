@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FallingObject
   - Rock
+  - HealthObject
   layers:
   - Default
   - TransparentFX
